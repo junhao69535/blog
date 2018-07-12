@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'zssk$^pu7nzb0)6b@f(a20i+t#)c(qd+msoel(8*&79m(h%@a%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','.zhaohaobin.cn','113.102.50.164']
 
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myblog',
     'comments',
+    'haystack',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,24 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
+
+#公共的static文件
+STATICFILES_DIRS=(
+        os.path.join(BASE_DIR,"common_static"),
+        os.path.join(BASE_DIR,"media"),
+        )
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+STATICFILES_FINDERS=("django.contrib.staticfiles.finders.FileSystemFinder",
+        "django.contrib.staticfiles.finders.AppDirectoriesFinder",)
+
+HAYSTACK_CONNECTIONS={
+        'default':{
+            'ENGINE':'myblog.whoosh_cn_backends.WhooshEngine',
+            'PATH':os.path.join(BASE_DIR,'whoosh_index'),
+            },
+        }
+HAYSTACK_SEARCH_RESULTS_PER_PAGE=10
+HAYSTACK_SIGNAL_PROCESSOR='haystack.signals.RealtimeSignalProcessor'

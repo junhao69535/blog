@@ -2,43 +2,43 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.html import strip_tags
-
+from DjangoUeditor.models import UEditorField
 import markdown
 
 
 
 class Category(models.Model):
-    name=models.CharField(max_length=100)
+    name=models.CharField(u"分类",max_length=100)
 
     def __str__(self):
         return self.name
 
 class Tag(models.Model):
-    name=models.CharField(max_length=100)
+    name=models.CharField(u"标签",max_length=100)
 
     def __str__(self):
         return self.name
 
 class Post(models.Model):
     #biaoti
-    title=models.CharField(max_length=70)
+    title=models.CharField(u"标题",max_length=70)
 
     #zhengwen
-    body=models.TextField()
+    body=UEditorField(u"文章正文",height=300,width=1000,default=u'',blank=True,imagePath="uploads/myblog/images/",toolbars='besttome',filePath='uploads/myblog/files/')
 
     #chuangjian he xiugai shijian
-    created_time=models.DateTimeField()
-    modified_time=models.DateTimeField()
+    created_time=models.DateTimeField(u"创建时间")
+    modified_time=models.DateTimeField(u"修改时间")
 
     #zhaiyao
-    excerpt=models.CharField(max_length=200,blank=True)
+    excerpt=models.CharField(u"摘要",max_length=200,blank=True)
 
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     tags=models.ManyToManyField(Tag,blank=True)
 
     author=models.ForeignKey(User,on_delete=models.CASCADE)
 
-    views=models.PositiveIntegerField(default=0)
+    views=models.PositiveIntegerField(u"阅读数",default=0)
 
     def __str__(self):
         return self.title
