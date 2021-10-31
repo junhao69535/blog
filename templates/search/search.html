@@ -4,28 +4,38 @@
 {% block main %}
     {% if query %}
         {% for result in page.object_list %}
-            <article class="post post-{{ result.object.pk }}">
+            <article class="result.object result.object-{{ result.object.pk }}">
                 <header class="entry-header">
                     <h1 class="entry-title">
-                        <a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query %}</a>
+                        <a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query max_length 16 %}</a>
                     </h1>
                     <div class="entry-meta">
-                    <span class="post-category">
-                        <a href="{% url 'myblog:category' result.object.category.pk %}">
-                            {{ result.object.category.name }}</a></span>
-                        <span class="post-date"><a href="#">
-                            <time class="entry-date" datetime="{{ result.object.created_time }}">
-                                {{ result.object.created_time }}</time></a></span>
-                        <span class="post-author"><a href="#">{{ result.object.author }}</a></span>
-                        <span class="comments-link">
-                        <a href="{{ result.object.get_absolute_url }}#comment-area">
-                            {{ result.object.comment_set.count }} 评论</a></span>
-                        <span class="views-count"><a
-                                href="{{ result.object.get_absolute_url }}">{{ result.object.views }} 阅读</a></span>
+                        <span class="result.object-author" style="color: black">{{ result.object.author }}</span>
+                        <span class="result.object-date"><a style="color: blue"
+                                                   href="{% url 'myblog:archives' result.object.created_time.year result.object.created_time.month %}"><time
+                                class="entry-date"
+                                datetime="{{ result.object.created_time }}">{{ result.object.created_time }}</time></a></span>
+                        <span class="views-count" style="color: black">{{ result.object.views }} 阅读</span>
+                        <span class="comments-link" style="color: black">{{ result.object.comment_set.count }} 评论</span>
+                        <br>
+                        <span class="result.object-category" style="color: black">分类：
+                            <a style="color: blue"
+                               href="{% url 'myblog:category' result.object.category.pk %}">{{ result.object.category.name }}</a>
+                        </span>
+                        <span class="widget-tag-cloud">
+                            <ul style="color: black">标签：
+                                {% for tag in result.object.tags.all %}
+                                    <li>
+                                        <a href="{% url 'myblog:tag' tag.pk %}" style="color: blue">{{ tag.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </span>
                     </div>
                 </header>
                 <div class="entry-content clearfix">
-                    <p>{% highlight result.object.body with query %}</p>
+{#                    <p>{{ result.object.body | truncatechars_html:100 | safe}}</p>#}
+                    <p>{% highlight result.object.body with query max_length 200 | safe %}</p>
                     <div class="read-more cl-effect-14">
                         <a href="{{ result.object.get_absolute_url }}" class="more-link">继续阅读 <span
                                 class="meta-nav">-&gt;</span></a>
@@ -33,7 +43,7 @@
                 </div>
             </article>
         {% empty %}
-            <div class="no-post">没有搜索到你想要的结果！</div>
+            <div class="no-result.object">没有搜索到你想要的结果！</div>
         {% endfor %}
         {% if page.has_previous or page.has_next %}
             <div>

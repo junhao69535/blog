@@ -11,15 +11,29 @@
 				    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
 			    </h1>
 			    <div class="entry-meta">
-				    <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
-				    <span class="post-date"><a href="#"><time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
-				    <span class="post-author"<a href="#">{{ post.author }}</a></span>
-				    <span class="comments-link"><a href="#">{{ post.comment_set.count }}</a></span>
-				    <span class="views-count"><a href="#">{{ post.views }} read</a></span>
-			    </div>
-		    </header>
+                    <span class="post-author" style="color: black">{{ post.author }}</span>
+                    <span class="post-date"><a style="color: blue"
+                            href="{% url 'myblog:archives' post.created_time.year post.created_time.month %}"><time
+                            class="entry-date"
+                            datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+                    <span class="views-count" style="color: black">{{ post.views }} 阅读</span>
+                    <span class="comments-link" style="color: black">{{ post.comment_set.count }} 评论</span>
+                    <br>
+                    <span class="post-category" style="color: black">分类：<a style="color: blue"
+                            href="{% url 'myblog:category' post.category.pk %}">{{ post.category.name }}</a></span>
+                    <span class="widget-tag-cloud">
+                        <ul style="color: black">标签：
+                            {% for tag in post.tags.all %}
+                                <li>
+                                    <a href="{% url 'myblog:tag' tag.pk %}" style="color: blue">{{ tag.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </header>
 		    <div class="entry-content clearfix">
-			    <p>{{ post.body|truncatechars_html:100 |safe }}</p>
+			    <p>{{ post.body | truncatechars_html:100 | safe }}</p>
 			    <div class="read-more cl-effect-14">
 				    <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读<span class="meta-nav">-&gt;</span></a>
 			    </div>
