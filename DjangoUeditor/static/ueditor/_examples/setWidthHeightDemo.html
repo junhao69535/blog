@@ -19,7 +19,7 @@
 
 <div style="clear:both"></div>
 <h2>初始化时给定编辑器的宽高</h2>
-<script type="text/plain" id="myEditor1" ></script>
+<script type="text/plain" id="myEditor1"></script>
 
 <h2>没有工具栏的编辑器</h2>
 <div id="myEditor2" style="width:700px;height:300px;border:1px solid #ccc"></div>
@@ -28,14 +28,14 @@
     //根据容器的宽高
     //容器给定高度
     UE.getEditor('myEditor');
-    UE.getEditor('myEditor1',{
-        initialFrameWidth : 600,
+    UE.getEditor('myEditor1', {
+        initialFrameWidth: 600,
         initialFrameHeight: 600
     });
 
     var noToolbar = new UE.Editor();
-    noToolbar.render('myEditor2',{
-        autoFloatEnabled : false
+    noToolbar.render('myEditor2', {
+        autoFloatEnabled: false
     })
 
 </script>

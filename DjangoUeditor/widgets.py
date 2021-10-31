@@ -3,11 +3,12 @@ from django import forms
 from django.conf import settings
 from django.contrib.admin.widgets import AdminTextareaWidget
 from django.template.loader import render_to_string
-from django.utils.safestring import mark_safe
 from django.utils.http import urlencode
-from . import settings as USettings
-from .commands import *
+from django.utils.safestring import mark_safe
 from django.utils.six import string_types
+
+from .commands import *
+
 
 # 修正输入的文件路径,输入路径的标准格式：abc,不需要前后置的路径符号
 # 如果输入的路径参数是一个函数则执行，否则可以拉接受时间格式化，用来生成如file20121208.bmp的重命名格式
@@ -28,8 +29,9 @@ def calc_path(OutputPath, instance=None):
 
     return OutputPath
 
+
 # width=600, height=300, toolbars="full", imagePath="", filePath="", upload_settings={},
-    # settings={},command=None,event_handler=None
+# settings={},command=None,event_handler=None
 
 
 class UEditorWidget(forms.Textarea):

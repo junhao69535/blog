@@ -1,10 +1,12 @@
- <script id="{{ UEditor.id }}" name="{{ UEditor.name }}"  style="display: inline-block;" type="text/plain">
+<script id="{{ UEditor.id }}" name="{{ UEditor.name }}" style="display: inline-block;" type="text/plain">
      {{ UEditor.value|safe }}
- </script>
+
+</script>
 <script type="text/javascript">
     {{ UEditor.commands|safe }}
-    var {{ UEditor.id  }} = UE.getEditor('{{ UEditor.id  }}',{{ UEditor.settings|safe }});
-     {{ UEditor.id  }}.ready(function(){
-         {{ UEditor.bindEvents|safe }}
-     });
+    var {{ UEditor.id  }} =
+    UE.getEditor('{{ UEditor.id  }}', {{ UEditor.settings|safe }});
+    {{ UEditor.id  }}.ready(function () {
+        {{ UEditor.bindEvents|safe }}
+    });
 </script>

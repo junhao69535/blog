@@ -12,7 +12,7 @@
                     <div class="entry-meta">
                         <span class="result.object-author" style="color: black">{{ result.object.author }}</span>
                         <span class="result.object-date"><a style="color: blue"
-                                                   href="{% url 'myblog:archives' result.object.created_time.year result.object.created_time.month %}"><time
+                                                            href="{% url 'myblog:archives' result.object.created_time.year result.object.created_time.month %}"><time
                                 class="entry-date"
                                 datetime="{{ result.object.created_time }}">{{ result.object.created_time }}</time></a></span>
                         <span class="views-count" style="color: black">{{ result.object.views }} 阅读</span>
@@ -34,7 +34,7 @@
                     </div>
                 </header>
                 <div class="entry-content clearfix">
-{#                    <p>{{ result.object.body | truncatechars_html:100 | safe}}</p>#}
+                    {#                    <p>{{ result.object.body | truncatechars_html:100 | safe}}</p>#}
                     <p>{% highlight result.object.body with query max_length 200 | safe %}</p>
                     <div class="read-more cl-effect-14">
                         <a href="{{ result.object.get_absolute_url }}" class="more-link">继续阅读 <span

@@ -7,8 +7,17 @@
     <script type="text/javascript" charset="utf-8" src="editor_api.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
     <style>
-        table{margin-bottom:10px;border-collapse:collapse;display:table;border:1px dashed #ddd}
-        #test td{padding:5px;border: 1px solid #DDD;}
+        table {
+            margin-bottom: 10px;
+            border-collapse: collapse;
+            display: table;
+            border: 1px dashed #ddd
+        }
+
+        #test td {
+            padding: 5px;
+            border: 1px solid #DDD;
+        }
     </style>
 </head>
 <body>
@@ -18,7 +27,9 @@
         <td width="10%">
             编辑区域一
         </td>
-        <td class="content" id="content1"><script id="editor1" type="text/plain" style="width:1024px;height:200px;">内容1</script></td>
+        <td class="content" id="content1">
+            <script id="editor1" type="text/plain" style="width:1024px;height:200px;">内容1</script>
+        </td>
     </tr>
     <tr>
         <td>
@@ -36,13 +47,13 @@
 
 <script type="text/javascript">
     var ue = UE.getEditor('editor1');
-    ue.ready(function(){
+    ue.ready(function () {
         //阻止工具栏的点击向上冒泡
-        $(this.container).click(function(e){
+        $(this.container).click(function (e) {
             e.stopPropagation()
         })
     });
-    $('.content').click(function(e){
+    $('.content').click(function (e) {
         var $target = $(this);
         var content = $target.html();
         var currentParnet = ue.container.parentNode.parentNode;
@@ -50,9 +61,9 @@
         $target.html('');
         $target.append(ue.container.parentNode);
         ue.reset();
-        setTimeout(function(){
+        setTimeout(function () {
             ue.setContent(content);
-        },200)
+        }, 200)
         $(currentParnet).html(currentContent);
     })
 </script>

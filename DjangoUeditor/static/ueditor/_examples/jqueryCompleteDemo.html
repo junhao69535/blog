@@ -8,25 +8,25 @@
     <script type="text/javascript" charset="utf-8" src="../ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="editor_api.js"></script>
     <script>
-        $(function(){
+        $(function () {
             var ue = UE.getEditor('myEditor');
-            $('#btn').click(function(){
+            $('#btn').click(function () {
                 //手动提交需要手动同步编辑器数据
                 ue.sync();
                 $('#form')[0].submit();
             });
             //--自动切换提交地址----
-            var version = ue.options.serverUrl || ue.options.imageUrl ||  "php",
-                    form=$('#form')[0];
+            var version = ue.options.serverUrl || ue.options.imageUrl || "php",
+                form = $('#form')[0];
 
-            if(version.match(/php/)){
-                form.action="./server/getContent.php";
-            }else if(version.match(/net/)){
-                form.action="./server/getContent.ashx";
-            }else if(version.match(/jsp/)){
-                form.action="./server/getContent.jsp";
-            }else if(version.match(/asp/)){
-                form.action="./server/getContent.asp";
+            if (version.match(/php/)) {
+                form.action = "./server/getContent.php";
+            } else if (version.match(/net/)) {
+                form.action = "./server/getContent.ashx";
+            } else if (version.match(/jsp/)) {
+                form.action = "./server/getContent.jsp";
+            } else if (version.match(/asp/)) {
+                form.action = "./server/getContent.asp";
             }
 
         })
@@ -36,8 +36,9 @@
 <form id="form" method="post" target="_blank">
     <script type="text/plain" id="myEditor" name="myEditor">
         <p>欢迎使用UEditor！</p>
+
     </script>
-     <input type="button" id="btn" value="提交数据">
+    <input type="button" id="btn" value="提交数据">
 </form>
 </body>
 </html>

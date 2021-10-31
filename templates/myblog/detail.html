@@ -76,7 +76,8 @@
                 {% for comment in comment_list %}
                     <li class="comment-item">
                         <span class="nickname">{{ comment.name }}</span>
-                        <time class="submit-dat" {{ comment.created_time }}</time>
+                        <time class="submit-dat"
+                        {{ comment.created_time }}</time>
                         <div class="text">
                             {{ comment.text }}
                         </div>
